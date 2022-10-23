@@ -55,6 +55,7 @@
 			children = (
 				70DFE6C72902E1FE00AA7C8B /* BetterRestApp.swift */,
 				70DFE6C92902E1FE00AA7C8B /* ContentView.swift */,
+				701B1FBF29058E5800343015 /* SleepCalculator.mlmodel */,
 				70DFE6CB2902E1FF00AA7C8B /* Assets.xcassets */,
 				70DFE6CD2902E1FF00AA7C8B /* Preview Content */,
 			);
@@ -64,7 +65,6 @@
 		70DFE6CD2902E1FF00AA7C8B /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				701B1FBF29058E5800343015 /* SleepCalculator.mlmodel */,
 				70DFE6CE2902E1FF00AA7C8B /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
