@@ -26,7 +26,7 @@ struct ContentView: View {
             
             let prediction = try model.prediction(wake: Double(hour + minute), estimatedSleep: sleepAmount, coffee: Double(coffeeAmount))
             
-            var result = wakeUp - prediction.actualSleep
+            let result = wakeUp - prediction.actualSleep
             let sleepTime = result.formatted(date: .omitted, time: .shortened)
             return "To get enough sleep, you need to go to bed at \(sleepTime) 😴"
         } catch {
