@@ -11,10 +11,28 @@ struct ContentView: View {
     @State private var wakeUp = defaultWakeTime
     @State private var sleepAmount = 8.0
     @State private var coffeeAmount = 1
-    
     @State private var alertTitle = ""
     @State private var alertMessage = ""
     @State private var showingAlert = false
+    
+    var resultString: String {
+        do {
+            let config = MLModelConfiguration()
+            let model = try SleepCalculator(configuration: config);
+            
+            let components = Calendar.current.dateComponents([.hour, .minute], from: wakeUp)
+            let hour = (components.hour ?? 0) * 60 * 60
+            let minute = (components.minute ?? 0) * 60
+            
+            let prediction = try model.prediction(wake: Double(hour + minute), estimatedSleep: sleepAmount, coffee: Double(coffeeAmount))
+            
+            var result = wakeUp - prediction.actualSleep
+            let sleepTime = result.formatted(date: .omitted, time: .shortened)
+            return "To get enough sleep, you need to go to bed at \(sleepTime) 😴"
+        } catch {
+            return ""
+        }
+    }
     
     static var defaultWakeTime: Date {
         var components = DateComponents()
@@ -49,6 +67,12 @@ struct ContentView: View {
                 } header: {
                     Text("Daily coffee intake")
                 }
+                
+                VStack {
+                    Text(resultString).font(.title2.bold()).multilineTextAlignment(.center)
+                }
+                    .padding()
+                    .frame(alignment: .center)
             }
             .navigationTitle("Better Rest")
             .toolbar {
